@@ -21,11 +21,10 @@ elif comp_user =="James":
 elif comp_user == 'christiandrappi':
     dirname = "/Users/christiandrappi/Dropbox/Pappy/"
 
-
-
+br = Browser('chrome')
 
 def load_browser():
-    br = Browser('chrome')
+    # br = Browser('chrome')
     br.visit("https://www.couchsurfing.com/")
     #br.execute_script('closeAgePopupBlock("ageVerify")')
     return br
@@ -47,6 +46,18 @@ def login(br):
 
 
     
+
+def list_people(br):
+    people = br.find_link_by_partial_href("/people")
+    print(people)
+    return people
+
+def send_message(people_id, br):
+    people_id.click()
+    br.find_link_by_partial_href("/couch_visits").click()
+    
+
+
 
 
 def buy_spirit(br, spirit):
@@ -111,22 +122,6 @@ def search_city(br):
 
 
 
-def parse_file():
-    with open("products_bought.txt", "r") as f:
-        products = [u.split(",") for u in f.read().split("\n")]
-        products = [[u[0], eval(u[1])] for u in products]
-    return products
-
-def write_file(products):
-    # products = [["10849 Pappy Van Winkle's Bourbon 23 Year Old", False], ["9532 Pappy Van Winkle's Old Family Reserve Whiskey 20 Year Old", False], ["34155 Pappy Van Winkle's Family Reserve Bourbon 15 Year Old", False]]
-    with open("products_bought.txt", "w") as f:
-        joined_products = "\n".join([",".join([str(p) for p in prods]) for prods in products])
-        f.write(joined_products)
-    return None
-
-def run_pappy(products):
-    bools = [not(bool(p[1])) for p in products]
-    return any(bools)
 
 # products = [["Pappy Van Winkle 23", False], ["Pappy Van Winkle 20", False], ["Pappy Van Winkle 15", False]]
 
