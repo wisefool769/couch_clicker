@@ -8,6 +8,11 @@ import time
 import selenium
 from getpass import getuser
 from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 comp_user = getuser()
@@ -84,12 +89,65 @@ def buy_spirit(br, spirit):
 # <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-1" id="s2id_autogen1_search" placeholder="">
 
 def search_city(br):
-
+    city = "Tokyo"
     # br.find_by_id("s2id_autogen2_search").click()
+    # city_box = br.find_element_by_id("s2id_search_query")
+    # city_box.click()
+    # input_box = br.find_element_by_class_name("select2-input")
+    # input_box.send_keys(city)
 
-    br.find_by_id("s2id_search_query").click()
-    # br.type("Tokyo, Japan")
-    br.find_by_id("s2id_autogen2_search").fill("Tokyo, Japan")
+
+    # br.find_element_by_class_name("select2-results-dept-0.select2-result.select2-result-selectable").click()
+
+    el = br.find_element_by_id('s2id_search_query')
+    actions = ActionChains(br)
+    actions.move_to_element(el)
+    actions.click()
+    actions.send_keys(city)
+    actions.perform()
+
+
+    # <li class="select2-results-dept-0 select2-result select2-result-selectable" role="presentation"><div class="select2-result-label" id="select2-result-label-7" role="option"><span class="select2-match">Tokyo</span>, Japan</div></li>
+
+    item_to_select = "Tokyo"
+
+    # xpath = '//div[@class="select2-results-dept-0.select2-result.select2-result-selectable" and' +\
+    #     ' text()[contains(.,"%s")]]' % (item_to_select)
+
+    xpath = '//div[@class="select2-result-label" and' +\
+        ' text()[contains(.,"%s")]]' % (item_to_select)    
+
+    wait = WebDriverWait(br, 10)
+    elm = wait.until(
+        EC.element_to_be_clickable(
+            (
+                By.XPATH,
+                xpath
+            )
+        ),
+        'waiting for %s to be clickable' % (xpath)
+    )
+    elm.click()
+
+    # br.implicitly_wait(10)
+    # br.find_element_by_class_name("select2-hidden-accessible").click()
+    # select.select_by_visible_text('Tokyo, Japan')
+
+    # br.get("https://www.couchsurfing.com/members/hosts?utf8=\xe2&search_type=host&search_query=Tokyo%2CJapan&latitude=35.6894875&longitude=139.6917064&country=Japan&region=Tokyo")
+
+
+    # br.implicitly_wait(10)
+    # input_box.send_keys(Keys.RETURN)
+    #br.find_element_by_id("s2id_search_query").click()
+    # # br.type("Tokyo, Japan")
+    
+    # city_box.send_keys("Tokyo, Japan")
+
+    # br.fill("search_query", "Tokyo, Japan")
+
+    # search_box = br.find_element_by_name("search_query")
+    # search_box.click()
+
 
 
     # br.fill("s2id_search_query", "Tokyo, Japan")
