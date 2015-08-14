@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from splinter import Browser
+from selenium import webdriver
 import datetime
 import json
 import sys
@@ -21,28 +21,25 @@ elif comp_user =="James":
 elif comp_user == 'christiandrappi':
     dirname = "/Users/christiandrappi/Dropbox/Pappy/"
 
-br = Browser('chrome')
+
 
 def load_browser():
-    # br = Browser('chrome')
-    br.visit("https://www.couchsurfing.com/")
+    br = webdriver.Chrome()
+    br.get("https://www.couchsurfing.com/")
     #br.execute_script('closeAgePopupBlock("ageVerify")')
     return br
 
 def login(br):
-    try:
-        br.click_link_by_href("/users/sign_in")
-        br.fill("user[login]",user)
-        br.fill("user[password]",pw)
-        br.find_by_name("commit").click()
-        # br.click_link_by_href("javascript:prepareSubmit(document.Logon)")
-        # br.find_element_by_name('commit').click()
-        # br.find_element_by_class_name('cs-button.pure-input-1.js-submit-login').click()   
-        # br.find_element(By.XPATH, '//button[text()="Log In"]')
-        # br.find_element_by_css_selector('cs_button').click()
-        return None
-    except:
-        return None
+    br.find_element_by_xpath("//a[contains(@href,'users/sign_in')]").click()
+    #br.find_element_by_href("/users/sign_in").click()
+    br.implicitly_wait(10)
+    user_field = br.find_element_by_name("user[login]")
+    user_field.send_keys(user)
+    pw_field = br.find_element_by_name("user[password]")
+    pw_field.send_keys(pw)
+
+    br.find_element_by_name("commit").click()
+
 
 
     
