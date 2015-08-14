@@ -13,7 +13,7 @@ from selenium.webdriver.common.alert import Alert
 comp_user = getuser()
 if comp_user == "aashiq":
     user = "aashiq.d@gmail.com"
-    pw = "C!hmTWYR9Zk"
+	pw = "C!hmTWYR9Zk"
 elif comp_user =="James":
     dirname = "C:\Users\James\Dropbox\Pappy\\"
 elif comp_user == 'christiandrappi':
