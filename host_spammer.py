@@ -15,6 +15,8 @@ if comp_user == "aashiq":
     user = "aashiq.d@gmail.com"
     pw = "C!hmTWYR9Zk"
 elif comp_user =="James":
+    user = "jtanman@gmail.com"
+    pw = "%t39XqV0dGp&"
     dirname = "C:\Users\James\Dropbox\Pappy\\"
 elif comp_user == 'christiandrappi':
     dirname = "/Users/christiandrappi/Dropbox/Pappy/"
@@ -29,11 +31,19 @@ def load_browser():
     return br
 
 def login(br):
-    br.click_link_by_href("/users/sign_in")
-    br.fill("user[login]",user)
-    br.fill("user[password]",pw)
-    br.find_by_name("commit").click()
-
+    try:
+        br.click_link_by_href("/users/sign_in")
+        br.fill("user[login]",user)
+        br.fill("user[password]",pw)
+        br.find_by_name("commit").click()
+        # br.click_link_by_href("javascript:prepareSubmit(document.Logon)")
+        # br.find_element_by_name('commit').click()
+        # br.find_element_by_class_name('cs-button.pure-input-1.js-submit-login').click()   
+        # br.find_element(By.XPATH, '//button[text()="Log In"]')
+        # br.find_element_by_css_selector('cs_button').click()
+        return None
+    except:
+        return None
     
 
 
