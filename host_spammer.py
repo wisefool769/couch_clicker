@@ -79,7 +79,8 @@ def search_city(br):
 
     # br.find_by_id("s2id_autogen2_search").fill("Tokyo, Japan")
 
-    br.fill("search_query", "Tokyo, Japan")
+    br.fill("search_query", "Tokyo, Japan\r")
+    # br.type("search_query", "Tokyo, Japan\r")
 
 
     # try:
