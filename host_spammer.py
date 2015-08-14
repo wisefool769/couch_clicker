@@ -88,11 +88,17 @@ def buy_spirit(br, spirit):
 
 def search_city(br):
 
-    # br.find_by_id("s2id_autogen2_search").fill("Tokyo, Japan")
+    # br.find_by_id("s2id_autogen2_search").click()
 
-    br.fill("search_query", "Tokyo, Japan\r")
-    # br.type("search_query", "Tokyo, Japan\r")
+    br.find_by_id("s2id_search_query").click()
+    # br.type("Tokyo, Japan")
+    br.find_by_id("s2id_autogen2_search").fill("Tokyo, Japan")
 
+
+    # br.fill("s2id_search_query", "Tokyo, Japan")
+    # br.type("search_query", "Tokyo, Japan", slowly = True)
+    # br.type("search_query", "Tokyo, Japan")
+    # b.execute_script('document.getElementsByName("f")[0].submit()')
 
     # try:
     #     br.find_by_id('s2id_autogen1_search').fill("Tokyo")
