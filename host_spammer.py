@@ -44,6 +44,8 @@ def login(br):
         return None
     except:
         return None
+
+
     
 
 
@@ -71,32 +73,40 @@ def buy_spirit(br, spirit):
     except:
         return False
 
-def check_pappy(br):
-    try:
-        br.fill("SearchKeyWord", pappy_search)
-    except: 
-        try:
-            br.visit("https://www.finewineandgoodspirits.com")
-            login(br)
-        except:
-            alert = br.switch_to_alert()
-            alert.dismiss()
-            br.visit("https://www.finewineandgoodspirits.com")
-            login(br)
-        return(False)
+# <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-1" id="s2id_autogen1_search" placeholder="">
 
-    try:
-        br.find_by_id('goSpiritButton').first.click()
-        has_pappy = br.is_element_present_by_id("productList")
-    except:
-        try:
-            alert = br.switch_to_alert()
-            alert.dismiss()
-        except:
-            br.visit("https://www.finewineandgoodspirits.com")
-            login(br)
-        return False
-    return has_pappy
+def search_city(br):
+
+    # br.find_by_id("s2id_autogen2_search").fill("Tokyo, Japan")
+
+    br.fill("search_query", "Tokyo, Japan")
+
+
+    # try:
+    #     br.find_by_id('s2id_autogen1_search').fill("Tokyo")
+    # except: 
+    #     try:
+    #         br.visit("https://www.finewineandgoodspirits.com")
+    #         login(br)
+    #     except:
+    #         alert = br.switch_to_alert()
+    #         alert.dismiss()
+    #         br.visit("https://www.finewineandgoodspirits.com")
+    #         login(br)
+    #     return(False)
+
+    # try:
+    #     br.find_by_id('goSpiritButton').first.click()
+    #     has_pappy = br.is_element_present_by_id("productList")
+    # except:
+    #     try:
+    #         alert = br.switch_to_alert()
+    #         alert.dismiss()
+    #     except:
+    #         br.visit("https://www.finewineandgoodspirits.com")
+    #         login(br)
+    #     return False
+    # return has_pappy
 
 
 
@@ -128,6 +138,7 @@ def run_pappy(products):
 if __name__ == '__main__':
     br = load_browser()
     login(br)
+    search_city(br)
     # while run_pappy(products):
 
     #     if(numPurchases >= 3):
