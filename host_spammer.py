@@ -29,14 +29,11 @@ def load_browser():
     return br
 
 def login(br):
-    try:
-        br.click_link_by_href("/users/sign_in")
-        br.fill("user_login",user)
-        br.fill("user_password",pw)
-        # br.click_link_by_href("javascript:prepareSubmit(document.Logon)")
-        return None
-    except:
-        return None
+    br.click_link_by_href("/users/sign_in")
+    br.fill("user[login]",user)
+    br.fill("user[password]",pw)
+    br.find_by_name("commit").click()
+
     
 
 
@@ -147,4 +144,4 @@ if __name__ == '__main__':
     # ts = datetime.datetime.now()
     # f.write("\n" + str(ts) + " done buying pappy!")
 
-
+#<input class="cs-button pure-input-1 js-submit-login
