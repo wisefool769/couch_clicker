@@ -31,22 +31,19 @@ def load_browser():
     return br
 
 def login(br):
-    # try:
+    try:
         br.click_link_by_href("/users/sign_in")
         br.fill("user[login]",user)
         br.fill("user[password]",pw)
-        print pw
+        br.find_by_name("commit").click()
         # br.click_link_by_href("javascript:prepareSubmit(document.Logon)")
         # br.find_element_by_name('commit').click()
-        # br.find_element_by_class_name('cs-button.pure-input-1.js-submit-login').click()
-
-        # <input class="" data-disable-with="Logging In..." name="commit" type="submit" value="Log In">
-        br.find_by_name("commit").click()
+        # br.find_element_by_class_name('cs-button.pure-input-1.js-submit-login').click()   
         # br.find_element(By.XPATH, '//button[text()="Log In"]')
         # br.find_element_by_css_selector('cs_button').click()
         return None
-    # except:
-        # return None
+    except:
+        return None
     
 
 
